@@ -11,4 +11,6 @@ model Seller {
     updatedAt DateTime @updatedAt
 
     meals Meal[]
+
+    orders Order[]
 }

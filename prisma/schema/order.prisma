@@ -1,0 +1,31 @@
+enum Status {
+    PENDING
+    CONFIRMED
+    COOKING
+    DELIVERED
+    CANCELLED
+}
+
+model Order{
+    id String @id @default(uuid())
+    userId String
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    sellerId String
+    seller Seller @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+    status Status @default(PENDING)
+    totalPrice Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    orderItems OrderItem[]
+}
+
+model OrderItem{
+    id String @id @default(uuid())
+    orderId String
+    order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+    mealId String
+    meal Meal @relation(fields: [mealId], references: [id], onDelete: Cascade)
+    quantity Int
+    priceAtOrderTime Int
+}
