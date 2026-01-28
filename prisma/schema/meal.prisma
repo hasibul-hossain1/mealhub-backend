@@ -13,6 +13,8 @@ model Meal{
     updatedAt DateTime @updatedAt
 
     orderItems OrderItem[]
+
+    reviews Review[]
 }
 
 model Category{

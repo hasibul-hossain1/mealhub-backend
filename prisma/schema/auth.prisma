@@ -21,6 +21,7 @@ model User {
   @@map("user")
   sellers Seller[]
   orders Order[]
+  reviews Review[]
 }
 
 model Session {

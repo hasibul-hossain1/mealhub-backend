@@ -1,6 +1,6 @@
 import { toNodeHandler } from "better-auth/node";
 import express from "express"
-import {auth} from '../utils/auth.js'
+import {auth} from '../lib/auth.js'
 const app = express()
 app.use(express.json())
 
