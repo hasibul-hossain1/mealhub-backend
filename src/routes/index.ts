@@ -1,9 +1,10 @@
 import { Router } from "express";
 import authRouter from "../modules/seller/seller.route.js";
-import testRouter from "../modules/test/test.route.js"
-import userRouter from '../modules/user/user.route.js'
+import testRouter from "../modules/test/test.route.js";
+import userRouter from "../modules/user/user.route.js";
+import mealRouter from "../modules/meals/meals.route.js";
 
-const router = Router()
+const router = Router();
 
 type RouteType = {
   path: string;
@@ -16,17 +17,21 @@ const routes: RouteType[] = [
     route: authRouter,
   },
   {
-    path:"/test",
-    route:testRouter
+    path: "/test",
+    route: testRouter,
   },
   {
-    path:"/me",
-    route:userRouter
-  }
+    path: "/me",
+    route: userRouter,
+  },
+  {
+    path: "/meals",
+    route: mealRouter,
+  },
 ];
 
-routes.forEach(({path,route}) => {
-    router.use(path,route)
+routes.forEach(({ path, route }) => {
+  router.use(path, route);
 });
 
-export default router
+export default router;

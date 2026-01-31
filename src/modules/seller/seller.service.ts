@@ -48,11 +48,30 @@ const signUpAsProvider = async ({
   });
   const updatedUser = await prisma.user.findUnique({
     where: { id: data.user.id },
-    include: {sellers:true},
+    include: { sellers: true },
   });
-  return updatedUser
+  return updatedUser;
+};
+
+const getAllSellers = async () => {
+  const data = await prisma.seller.findMany();
+  return data;
+};
+
+const getSingleSellerWithMenu = async (id: string) => {
+  const data = await prisma.seller.findUniqueOrThrow({
+    where: {
+      id,
+    },
+    include: {
+      meals: true,
+    },
+  });
+  return data;
 };
 
 export default {
   signUpAsProvider,
+  getAllSellers,
+  getSingleSellerWithMenu
 };

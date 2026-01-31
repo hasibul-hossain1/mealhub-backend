@@ -18,6 +18,32 @@ const signUpAsProvider: RequestHandler = async (req, res) => {
     });
 };
 
+
+const getSingleSellerWithMenu: RequestHandler = async (req, res) => {
+    const id = req.params.id as string;
+    console.log(id);
+    const data = await sellerService.getSingleSellerWithMenu(id)
+    res.status(200).json({
+      success: true,
+      data,
+      message: "Retrieved single seller with menu successfully",
+    });
+};
+
+const getAllSellers: RequestHandler = async (req, res) => {
+    const data = await sellerService.getAllSellers()
+    res.status(200).json({
+      success: true,
+      data,
+      message: "Retrieved All Sellers successfully",
+    });
+};
+
+
+
+
 export default {
   signUpAsProvider,
+  getAllSellers,
+  getSingleSellerWithMenu
 };

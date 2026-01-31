@@ -9,4 +9,10 @@ const router = Router()
 router.post('/create-account',catchAsync(sellerController.signUpAsProvider))
 
 
+router.get('/',catchAsync(sellerController.getAllSellers))
+
+
+router.get('/:id',catchAsync(sellerController.getSingleSellerWithMenu))
+
+
 export default router
