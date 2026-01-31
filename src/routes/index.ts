@@ -1,6 +1,7 @@
 import { Router } from "express";
-import authRouter from "../modules/seller/seller.route";
-import testRouter from "../modules/test/test.route"
+import authRouter from "../modules/seller/seller.route.js";
+import testRouter from "../modules/test/test.route.js"
+import userRouter from '../modules/user/user.route.js'
 
 const router = Router()
 
@@ -17,6 +18,10 @@ const routes: RouteType[] = [
   {
     path:"/test",
     route:testRouter
+  },
+  {
+    path:"/me",
+    route:userRouter
   }
 ];
 

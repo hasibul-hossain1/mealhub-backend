@@ -3,6 +3,7 @@ import express from "express"
 import {auth} from '../lib/auth.js'
 import router from "../routes/index.js";
 import cors from 'cors'
+import { globalErrorHandler } from "../middleware/error.middleware.js";
 
 const app = express()
 app.use(express.json())
@@ -17,6 +18,8 @@ app.all('/api/v1/auth/{*any}', toNodeHandler(auth));
 
 
 app.use('/api/v1',router)
+
+app.use(globalErrorHandler)
 
 app.get('/',(req,res) => {
     res.send("The server is working")

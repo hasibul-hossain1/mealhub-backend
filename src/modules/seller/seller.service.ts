@@ -1,6 +1,6 @@
-import { Role } from "../../generated/prisma/enums";
-import { auth } from "../../lib/auth";
-import { prisma } from "../../lib/prisma";
+import { Role } from "../../generated/prisma/enums.js";
+import { auth } from "../../lib/auth.js";
+import { prisma } from "../../lib/prisma.js";
 
 const signUpAsProvider = async ({
   name,
