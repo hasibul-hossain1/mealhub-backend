@@ -15,13 +15,14 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
-  role          Role      @default(CUSTOMER)
+  role     Role?     @default(CUSTOMER)
+  isActive Boolean?  @default(true)
+  sellers  Seller[]
+  orders   Order[]
+  reviews  Review[]
 
   @@unique([email])
   @@map("user")
-  sellers Seller[]
-  orders Order[]
-  reviews Review[]
 }
 
 model Session {

@@ -1200,7 +1200,8 @@ export const UserScalarFieldEnum = {
   image: 'image',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  role: 'role'
+  role: 'role',
+  isActive: 'isActive'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1320,6 +1321,8 @@ export const SellerScalarFieldEnum = {
   description: 'description',
   address: 'address',
   phoneNumber: 'phoneNumber',
+  isProfileCompleted: 'isProfileCompleted',
+  isApproved: 'isApproved',
   isOpen: 'isOpen',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

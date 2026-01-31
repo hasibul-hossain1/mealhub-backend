@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "Seller" ADD COLUMN     "isApproved" BOOLEAN NOT NULL DEFAULT true,
+ADD COLUMN     "isProfileCompleted" BOOLEAN NOT NULL DEFAULT false,
+ALTER COLUMN "restaurantName" DROP NOT NULL,
+ALTER COLUMN "address" DROP NOT NULL,
+ALTER COLUMN "phoneNumber" DROP NOT NULL,
+ALTER COLUMN "isOpen" SET DEFAULT false;

@@ -31,6 +31,8 @@ export type SellerMinAggregateOutputType = {
   description: string | null
   address: string | null
   phoneNumber: string | null
+  isProfileCompleted: boolean | null
+  isApproved: boolean | null
   isOpen: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,6 +45,8 @@ export type SellerMaxAggregateOutputType = {
   description: string | null
   address: string | null
   phoneNumber: string | null
+  isProfileCompleted: boolean | null
+  isApproved: boolean | null
   isOpen: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -55,6 +59,8 @@ export type SellerCountAggregateOutputType = {
   description: number
   address: number
   phoneNumber: number
+  isProfileCompleted: number
+  isApproved: number
   isOpen: number
   createdAt: number
   updatedAt: number
@@ -69,6 +75,8 @@ export type SellerMinAggregateInputType = {
   description?: true
   address?: true
   phoneNumber?: true
+  isProfileCompleted?: true
+  isApproved?: true
   isOpen?: true
   createdAt?: true
   updatedAt?: true
@@ -81,6 +89,8 @@ export type SellerMaxAggregateInputType = {
   description?: true
   address?: true
   phoneNumber?: true
+  isProfileCompleted?: true
+  isApproved?: true
   isOpen?: true
   createdAt?: true
   updatedAt?: true
@@ -93,6 +103,8 @@ export type SellerCountAggregateInputType = {
   description?: true
   address?: true
   phoneNumber?: true
+  isProfileCompleted?: true
+  isApproved?: true
   isOpen?: true
   createdAt?: true
   updatedAt?: true
@@ -174,10 +186,12 @@ export type SellerGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type SellerGroupByOutputType = {
   id: string
   userId: string
-  restaurantName: string
+  restaurantName: string | null
   description: string | null
-  address: string
-  phoneNumber: string
+  address: string | null
+  phoneNumber: string | null
+  isProfileCompleted: boolean
+  isApproved: boolean
   isOpen: boolean
   createdAt: Date
   updatedAt: Date
@@ -207,10 +221,12 @@ export type SellerWhereInput = {
   NOT?: Prisma.SellerWhereInput | Prisma.SellerWhereInput[]
   id?: Prisma.StringFilter<"Seller"> | string
   userId?: Prisma.StringFilter<"Seller"> | string
-  restaurantName?: Prisma.StringFilter<"Seller"> | string
+  restaurantName?: Prisma.StringNullableFilter<"Seller"> | string | null
   description?: Prisma.StringNullableFilter<"Seller"> | string | null
-  address?: Prisma.StringFilter<"Seller"> | string
-  phoneNumber?: Prisma.StringFilter<"Seller"> | string
+  address?: Prisma.StringNullableFilter<"Seller"> | string | null
+  phoneNumber?: Prisma.StringNullableFilter<"Seller"> | string | null
+  isProfileCompleted?: Prisma.BoolFilter<"Seller"> | boolean
+  isApproved?: Prisma.BoolFilter<"Seller"> | boolean
   isOpen?: Prisma.BoolFilter<"Seller"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Seller"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Seller"> | Date | string
@@ -222,10 +238,12 @@ export type SellerWhereInput = {
 export type SellerOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  restaurantName?: Prisma.SortOrder
+  restaurantName?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  address?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  isProfileCompleted?: Prisma.SortOrder
+  isApproved?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -236,29 +254,33 @@ export type SellerOrderByWithRelationInput = {
 
 export type SellerWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  userId?: string
   AND?: Prisma.SellerWhereInput | Prisma.SellerWhereInput[]
   OR?: Prisma.SellerWhereInput[]
   NOT?: Prisma.SellerWhereInput | Prisma.SellerWhereInput[]
-  userId?: Prisma.StringFilter<"Seller"> | string
-  restaurantName?: Prisma.StringFilter<"Seller"> | string
+  restaurantName?: Prisma.StringNullableFilter<"Seller"> | string | null
   description?: Prisma.StringNullableFilter<"Seller"> | string | null
-  address?: Prisma.StringFilter<"Seller"> | string
-  phoneNumber?: Prisma.StringFilter<"Seller"> | string
+  address?: Prisma.StringNullableFilter<"Seller"> | string | null
+  phoneNumber?: Prisma.StringNullableFilter<"Seller"> | string | null
+  isProfileCompleted?: Prisma.BoolFilter<"Seller"> | boolean
+  isApproved?: Prisma.BoolFilter<"Seller"> | boolean
   isOpen?: Prisma.BoolFilter<"Seller"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Seller"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Seller"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   meals?: Prisma.MealListRelationFilter
   orders?: Prisma.OrderListRelationFilter
-}, "id">
+}, "id" | "userId">
 
 export type SellerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  restaurantName?: Prisma.SortOrder
+  restaurantName?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  address?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  isProfileCompleted?: Prisma.SortOrder
+  isApproved?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -273,10 +295,12 @@ export type SellerScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SellerScalarWhereWithAggregatesInput | Prisma.SellerScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Seller"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Seller"> | string
-  restaurantName?: Prisma.StringWithAggregatesFilter<"Seller"> | string
+  restaurantName?: Prisma.StringNullableWithAggregatesFilter<"Seller"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Seller"> | string | null
-  address?: Prisma.StringWithAggregatesFilter<"Seller"> | string
-  phoneNumber?: Prisma.StringWithAggregatesFilter<"Seller"> | string
+  address?: Prisma.StringNullableWithAggregatesFilter<"Seller"> | string | null
+  phoneNumber?: Prisma.StringNullableWithAggregatesFilter<"Seller"> | string | null
+  isProfileCompleted?: Prisma.BoolWithAggregatesFilter<"Seller"> | boolean
+  isApproved?: Prisma.BoolWithAggregatesFilter<"Seller"> | boolean
   isOpen?: Prisma.BoolWithAggregatesFilter<"Seller"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Seller"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Seller"> | Date | string
@@ -284,10 +308,12 @@ export type SellerScalarWhereWithAggregatesInput = {
 
 export type SellerCreateInput = {
   id?: string
-  restaurantName: string
+  restaurantName?: string | null
   description?: string | null
-  address: string
-  phoneNumber: string
+  address?: string | null
+  phoneNumber?: string | null
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -299,10 +325,12 @@ export type SellerCreateInput = {
 export type SellerUncheckedCreateInput = {
   id?: string
   userId: string
-  restaurantName: string
+  restaurantName?: string | null
   description?: string | null
-  address: string
-  phoneNumber: string
+  address?: string | null
+  phoneNumber?: string | null
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -312,10 +340,12 @@ export type SellerUncheckedCreateInput = {
 
 export type SellerUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -327,10 +357,12 @@ export type SellerUpdateInput = {
 export type SellerUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -341,10 +373,12 @@ export type SellerUncheckedUpdateInput = {
 export type SellerCreateManyInput = {
   id?: string
   userId: string
-  restaurantName: string
+  restaurantName?: string | null
   description?: string | null
-  address: string
-  phoneNumber: string
+  address?: string | null
+  phoneNumber?: string | null
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -352,10 +386,12 @@ export type SellerCreateManyInput = {
 
 export type SellerUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -364,10 +400,12 @@ export type SellerUpdateManyMutationInput = {
 export type SellerUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -395,6 +433,8 @@ export type SellerCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   address?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  isProfileCompleted?: Prisma.SortOrder
+  isApproved?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -407,6 +447,8 @@ export type SellerMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   address?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  isProfileCompleted?: Prisma.SortOrder
+  isApproved?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -419,6 +461,8 @@ export type SellerMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   address?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  isProfileCompleted?: Prisma.SortOrder
+  isApproved?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -496,10 +540,12 @@ export type SellerUpdateOneRequiredWithoutOrdersNestedInput = {
 
 export type SellerCreateWithoutUserInput = {
   id?: string
-  restaurantName: string
+  restaurantName?: string | null
   description?: string | null
-  address: string
-  phoneNumber: string
+  address?: string | null
+  phoneNumber?: string | null
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -509,10 +555,12 @@ export type SellerCreateWithoutUserInput = {
 
 export type SellerUncheckedCreateWithoutUserInput = {
   id?: string
-  restaurantName: string
+  restaurantName?: string | null
   description?: string | null
-  address: string
-  phoneNumber: string
+  address?: string | null
+  phoneNumber?: string | null
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -552,10 +600,12 @@ export type SellerScalarWhereInput = {
   NOT?: Prisma.SellerScalarWhereInput | Prisma.SellerScalarWhereInput[]
   id?: Prisma.StringFilter<"Seller"> | string
   userId?: Prisma.StringFilter<"Seller"> | string
-  restaurantName?: Prisma.StringFilter<"Seller"> | string
+  restaurantName?: Prisma.StringNullableFilter<"Seller"> | string | null
   description?: Prisma.StringNullableFilter<"Seller"> | string | null
-  address?: Prisma.StringFilter<"Seller"> | string
-  phoneNumber?: Prisma.StringFilter<"Seller"> | string
+  address?: Prisma.StringNullableFilter<"Seller"> | string | null
+  phoneNumber?: Prisma.StringNullableFilter<"Seller"> | string | null
+  isProfileCompleted?: Prisma.BoolFilter<"Seller"> | boolean
+  isApproved?: Prisma.BoolFilter<"Seller"> | boolean
   isOpen?: Prisma.BoolFilter<"Seller"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Seller"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Seller"> | Date | string
@@ -563,10 +613,12 @@ export type SellerScalarWhereInput = {
 
 export type SellerCreateWithoutMealsInput = {
   id?: string
-  restaurantName: string
+  restaurantName?: string | null
   description?: string | null
-  address: string
-  phoneNumber: string
+  address?: string | null
+  phoneNumber?: string | null
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -577,10 +629,12 @@ export type SellerCreateWithoutMealsInput = {
 export type SellerUncheckedCreateWithoutMealsInput = {
   id?: string
   userId: string
-  restaurantName: string
+  restaurantName?: string | null
   description?: string | null
-  address: string
-  phoneNumber: string
+  address?: string | null
+  phoneNumber?: string | null
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -605,10 +659,12 @@ export type SellerUpdateToOneWithWhereWithoutMealsInput = {
 
 export type SellerUpdateWithoutMealsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -619,10 +675,12 @@ export type SellerUpdateWithoutMealsInput = {
 export type SellerUncheckedUpdateWithoutMealsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -631,10 +689,12 @@ export type SellerUncheckedUpdateWithoutMealsInput = {
 
 export type SellerCreateWithoutOrdersInput = {
   id?: string
-  restaurantName: string
+  restaurantName?: string | null
   description?: string | null
-  address: string
-  phoneNumber: string
+  address?: string | null
+  phoneNumber?: string | null
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -645,10 +705,12 @@ export type SellerCreateWithoutOrdersInput = {
 export type SellerUncheckedCreateWithoutOrdersInput = {
   id?: string
   userId: string
-  restaurantName: string
+  restaurantName?: string | null
   description?: string | null
-  address: string
-  phoneNumber: string
+  address?: string | null
+  phoneNumber?: string | null
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -673,10 +735,12 @@ export type SellerUpdateToOneWithWhereWithoutOrdersInput = {
 
 export type SellerUpdateWithoutOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -687,10 +751,12 @@ export type SellerUpdateWithoutOrdersInput = {
 export type SellerUncheckedUpdateWithoutOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -699,10 +765,12 @@ export type SellerUncheckedUpdateWithoutOrdersInput = {
 
 export type SellerCreateManyUserInput = {
   id?: string
-  restaurantName: string
+  restaurantName?: string | null
   description?: string | null
-  address: string
-  phoneNumber: string
+  address?: string | null
+  phoneNumber?: string | null
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -710,10 +778,12 @@ export type SellerCreateManyUserInput = {
 
 export type SellerUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -723,10 +793,12 @@ export type SellerUpdateWithoutUserInput = {
 
 export type SellerUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -736,10 +808,12 @@ export type SellerUncheckedUpdateWithoutUserInput = {
 
 export type SellerUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  restaurantName?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -792,6 +866,8 @@ export type SellerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   description?: boolean
   address?: boolean
   phoneNumber?: boolean
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -808,6 +884,8 @@ export type SellerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   description?: boolean
   address?: boolean
   phoneNumber?: boolean
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -821,6 +899,8 @@ export type SellerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   description?: boolean
   address?: boolean
   phoneNumber?: boolean
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -834,12 +914,14 @@ export type SellerSelectScalar = {
   description?: boolean
   address?: boolean
   phoneNumber?: boolean
+  isProfileCompleted?: boolean
+  isApproved?: boolean
   isOpen?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SellerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "restaurantName" | "description" | "address" | "phoneNumber" | "isOpen" | "createdAt" | "updatedAt", ExtArgs["result"]["seller"]>
+export type SellerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "restaurantName" | "description" | "address" | "phoneNumber" | "isProfileCompleted" | "isApproved" | "isOpen" | "createdAt" | "updatedAt", ExtArgs["result"]["seller"]>
 export type SellerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   meals?: boolean | Prisma.Seller$mealsArgs<ExtArgs>
@@ -863,10 +945,12 @@ export type $SellerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
-    restaurantName: string
+    restaurantName: string | null
     description: string | null
-    address: string
-    phoneNumber: string
+    address: string | null
+    phoneNumber: string | null
+    isProfileCompleted: boolean
+    isApproved: boolean
     isOpen: boolean
     createdAt: Date
     updatedAt: Date
@@ -1302,6 +1386,8 @@ export interface SellerFieldRefs {
   readonly description: Prisma.FieldRef<"Seller", 'String'>
   readonly address: Prisma.FieldRef<"Seller", 'String'>
   readonly phoneNumber: Prisma.FieldRef<"Seller", 'String'>
+  readonly isProfileCompleted: Prisma.FieldRef<"Seller", 'Boolean'>
+  readonly isApproved: Prisma.FieldRef<"Seller", 'Boolean'>
   readonly isOpen: Prisma.FieldRef<"Seller", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Seller", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Seller", 'DateTime'>

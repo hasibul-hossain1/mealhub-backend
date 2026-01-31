@@ -1,15 +1,22 @@
 import { toNodeHandler } from "better-auth/node";
 import express from "express"
 import {auth} from '../lib/auth.js'
+import router from "../routes/index.js";
+import cors from 'cors'
+
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 app.use((req,res,next)=>{
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
     next()
 })
 
-app.all('/api/auth/{*any}', toNodeHandler(auth));
+app.all('/api/v1/auth/{*any}', toNodeHandler(auth));
+
+
+app.use('/api/v1',router)
 
 app.get('/',(req,res) => {
     res.send("The server is working")

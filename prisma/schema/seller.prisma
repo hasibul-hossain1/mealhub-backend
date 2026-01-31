@@ -1,14 +1,16 @@
 model Seller {
-    id     String @id @default(uuid())
-    userId String
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    restaurantName String
-    description String?
-    address String
-    phoneNumber String
-    isOpen Boolean @default(true)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id                 String   @id @default(uuid())
+    userId             String   @unique
+    user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    restaurantName     String?
+    description        String?
+    address            String?
+    phoneNumber        String?
+    isProfileCompleted Boolean  @default(false)
+    isApproved         Boolean  @default(false)
+    isOpen             Boolean  @default(false)
+    createdAt          DateTime @default(now())
+    updatedAt          DateTime @updatedAt
 
     meals Meal[]
 
