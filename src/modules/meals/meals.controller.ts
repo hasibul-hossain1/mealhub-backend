@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import mealsService from "./meals.service";
+import mealsService from "./meals.service.js";
 
 const getAllMeals: RequestHandler = async (req, res) => {
   const allMeals = await mealsService.getAllMeals();

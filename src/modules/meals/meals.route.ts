@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { catchAsync } from "../../utils/catchAsync";
-import mealsController from "./meals.controller";
+import { catchAsync } from "../../utils/catchAsync.js";
+import mealsController from "./meals.controller.js";
 
 const router = Router()
+
+
 
 router.get("/",catchAsync(mealsController.getAllMeals))
 

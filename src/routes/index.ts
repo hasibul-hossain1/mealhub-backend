@@ -3,6 +3,7 @@ import authRouter from "../modules/seller/seller.route.js";
 import testRouter from "../modules/test/test.route.js";
 import userRouter from "../modules/user/user.route.js";
 import mealRouter from "../modules/meals/meals.route.js";
+import orderRouter from "../modules/order/order.route.js"
 
 const router = Router();
 
@@ -28,6 +29,10 @@ const routes: RouteType[] = [
     path: "/meals",
     route: mealRouter,
   },
+  {
+    path:"/orders",
+    route:orderRouter
+  }
 ];
 
 routes.forEach(({ path, route }) => {
