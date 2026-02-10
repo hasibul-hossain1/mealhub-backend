@@ -22,7 +22,7 @@ const routes: RouteType[] = [
     route: testRouter,
   },
   {
-    path: "/me",
+    path: "/user",
     route: userRouter,
   },
   {
