@@ -1,5 +1,5 @@
 import { Router } from "express";
-import authRouter from "../modules/seller/seller.route.js";
+import sellerRoute from "../modules/seller/seller.route.js";
 import testRouter from "../modules/test/test.route.js";
 import userRouter from "../modules/user/user.route.js";
 import mealRouter from "../modules/meals/meals.route.js";
@@ -15,7 +15,7 @@ type RouteType = {
 const routes: RouteType[] = [
   {
     path: "/seller",
-    route: authRouter,
+    route: sellerRoute,
   },
   {
     path: "/test",

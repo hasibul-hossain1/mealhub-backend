@@ -20,7 +20,8 @@ const getSingleMealById: RequestHandler = async (req, res) => {
   });
 };
 
+
 export default {
   getAllMeals,
-  getSingleMealById
+  getSingleMealById,
 };

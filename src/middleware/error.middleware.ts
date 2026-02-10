@@ -18,11 +18,27 @@ export const globalErrorHandler = (
         statusCode = 404;
         message = "Record not found";
         break;
-
+      case "P2002":
+        statusCode = 400;
+        message= "duplicate value error";
+        break;
+      case "P2003":
+        statusCode = 400;
+        message= "foreign key constraint error";
+        break;
+      case "P2004":
+        statusCode = 400;
+        message= "A constraint failed";
       default:
         break;
     }
   }
+
+  if (err instanceof Prisma.PrismaClientValidationError) {
+    statusCode = 400;
+    message = "Prisma validation failed"
+  }
+
   return res.status(statusCode).json({
     success: false,
     message,

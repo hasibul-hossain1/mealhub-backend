@@ -1,7 +1,5 @@
 import { RequestHandler } from "express";
 import orderService from "./order.service";
-import { prisma } from "../../lib/prisma";
-import { Role } from "../../generated/prisma/enums";
 
 const createOrder: RequestHandler = async (req, res) => {
   const userId = req.user.id;

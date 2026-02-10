@@ -1,3 +1,4 @@
+import { Meal } from "../../generated/prisma/client.js";
 import { prisma } from "../../lib/prisma.js";
 
 const getAllMeals = async () => {
@@ -15,7 +16,9 @@ const getSingleMealById = async (id:string) => {
     return meal
 };
 
+
+
 export default {
     getAllMeals,
-    getSingleMealById
+    getSingleMealById,
 }

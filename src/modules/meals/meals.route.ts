@@ -5,9 +5,13 @@ import mealsController from "./meals.controller.js";
 const router = Router()
 
 
-
+// for user
 router.get("/",catchAsync(mealsController.getAllMeals))
 
 router.get("/:id",catchAsync(mealsController.getSingleMealById))
+
+
+
+
 
 export default router

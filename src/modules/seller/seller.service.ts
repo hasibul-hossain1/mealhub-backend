@@ -1,6 +1,8 @@
-import { Role } from "../../generated/prisma/enums.js";
+import { Meal } from "../../generated/prisma/client.js";
+import { Role, Status } from "../../generated/prisma/enums.js";
 import { auth } from "../../lib/auth.js";
 import { prisma } from "../../lib/prisma.js";
+import { ApiError } from "../../utils/ApiError.js";
 
 const signUpAsProvider = async ({
   name,
@@ -70,8 +72,152 @@ const getSingleSellerWithMenu = async (id: string) => {
   return data;
 };
 
+type addMealServiceInput = {
+  userId: string;
+  mealData: {
+    name: string;
+    price: number;
+    description?: string;
+    categoryId:string;
+    imageUrl:string;
+  };
+};
+
+const addMeal = async ({
+  mealData,
+  userId,
+}:addMealServiceInput) => {
+  const data = await prisma.$transaction(async (tx) => {
+    const seller = await tx.seller.findUniqueOrThrow({
+      where: {
+        userId,
+      },
+      select: {
+        id: true,
+      },
+    });
+    return await tx.meal.create({
+      data: {
+        foodName:mealData.name,
+        price:mealData.price,
+        description:mealData.description ?? null,
+        sellerId:seller.id,
+        categoryId:mealData.categoryId,
+        imageUrl:mealData.imageUrl,
+      },
+    });
+  });
+
+  return data;
+};
+
+const updateMeal = async (mealId:string,userId:string,isAdmin:boolean,data:Partial<Meal>) => {
+  const meal = await prisma.meal.findUniqueOrThrow({
+    where:{
+      id:mealId
+    },
+    select:{
+      sellerId:true
+    }
+  })
+
+  const seller = await prisma.seller.findUniqueOrThrow({
+    where:{
+      userId
+    },
+    select:{
+      id:true
+    }
+  })
+
+
+  if (!isAdmin && meal.sellerId !== seller.id) {
+    throw new ApiError(401,"Unauthorized")
+  }
+
+  const updatedMeal = await prisma.meal.update({
+    where:{
+      id:mealId
+    },
+    data
+  })
+  return updatedMeal
+}
+
+
+const deleteMeal = async (mealId:string,userId:string,isAdmin:boolean) => {
+  const meal = await prisma.meal.findUniqueOrThrow({
+    where:{
+      id:mealId
+    },
+    select:{
+      sellerId:true
+    }
+  })
+
+  const seller = await prisma.seller.findUniqueOrThrow({
+    where:{
+      userId
+    },
+    select:{
+      id:true
+    }
+  })
+
+
+  if (!isAdmin && meal.sellerId !== seller.id) {
+    throw new ApiError(401,"Unauthorized")
+  }
+
+  const deletedMeal = await prisma.meal.delete({
+    where:{
+      id:mealId
+    }
+  })
+  return deletedMeal
+}
+
+const updateOrderStatus = async (orderId:string,userId:string,status:Status) => {
+  const order = await prisma.order.findUniqueOrThrow({
+    where:{
+      id:orderId
+    },
+    select:{
+      sellerId:true
+    }
+  })
+
+  const seller = await prisma.seller.findUniqueOrThrow({
+    where:{
+      userId
+    },
+    select:{
+      id:true
+    }
+  })
+
+
+  if (order.sellerId !== seller.id) {
+    throw new ApiError(401,"Unauthorized")
+  }
+
+  const updatedStatus = await prisma.order.update({
+    where:{
+      id:orderId
+    },
+    data:{
+      status
+    }
+  })
+  return updatedStatus
+}
+
 export default {
   signUpAsProvider,
   getAllSellers,
-  getSingleSellerWithMenu
+  getSingleSellerWithMenu,
+  addMeal,
+  updateMeal,
+  deleteMeal,
+  updateOrderStatus
 };
