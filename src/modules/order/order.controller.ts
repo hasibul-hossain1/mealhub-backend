@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import orderService from "./order.service";
+import orderService from "./order.service.js";
 
 const createOrder: RequestHandler = async (req, res) => {
   const userId = req.user.id;

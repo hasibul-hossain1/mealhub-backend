@@ -1,5 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
-import { ApiError } from "../../utils/ApiError";
+import { ApiError } from "../../utils/ApiError.js";
 
 type CreateOrderPayload = {
   userId: string;
