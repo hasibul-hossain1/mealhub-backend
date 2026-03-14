@@ -6,7 +6,6 @@ import { seedAdmin } from "./seed/seedAdmin.js";
 const port = config.port;
 
 app.listen(port, () => {
-  console.log(process.env.DATABASE_URL);
   console.log(`Server running on port ${port}🚀
         http://localhost:${port}/`);
 });

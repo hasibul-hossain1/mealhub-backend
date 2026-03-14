@@ -1,8 +1,8 @@
 import { Router } from "express";
-import adminController from "./admin.controller";
-import { catchAsync } from "../../utils/catchAsync";
-import { authMiddleware } from "../../middleware/auth.middleware";
-import { Role } from "../../generated/prisma/enums";
+import adminController from "./admin.controller.js";
+import { catchAsync } from "../../utils/catchAsync.js";
+import { authMiddleware } from "../../middleware/auth.middleware.js";
+import { Role } from "../../generated/prisma/enums.js";
 
 const router =Router()
 

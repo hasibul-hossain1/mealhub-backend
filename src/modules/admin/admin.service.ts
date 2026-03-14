@@ -1,5 +1,5 @@
 import { Category } from "../../generated/prisma/client";
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../lib/prisma.js";
 
 const createCategory = async (data: Partial<Category>) => {
   const category = await prisma.category.create({

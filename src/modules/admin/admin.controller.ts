@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from "express";
-import adminService from "./admin.service";
+import adminService from "./admin.service.js";
 
 const createCategory = async (req:Request,res:Response) => {
     const category = await adminService.createCategory(req.body)
