@@ -265,6 +265,43 @@ const getAllOrder = async ({userId}:{userId:string}) => {
   })
 }
 
+type UpdateSellerProfilePayload = {
+  restaurantName:string;
+  description?:string;
+  address:string;
+  phoneNumber:string;
+};
+
+const updateSellerProfile = async ({userId,payload}: {userId:string,payload:UpdateSellerProfilePayload}) => {
+  const seller = await prisma.seller.findUniqueOrThrow({
+    where:{
+      userId
+    }
+  })
+  const data = await prisma.seller.update({
+    where:{
+      id:seller.id
+    },
+    data:{
+      restaurantName: payload.restaurantName,
+      description:payload.description ?? null,
+      address:payload.address,
+      phoneNumber:payload.phoneNumber,
+      isProfileCompleted:true
+    }
+  })
+  return data;
+}
+
+const getMySellerProfile = async ({userId}:{userId:string}) => {
+  const data = await prisma.seller.findUniqueOrThrow({
+    where:{
+      userId
+    }
+  })
+  return data;
+}
+
 export default {
   signUpAsProvider,
   getAllSellers,
@@ -274,5 +311,7 @@ export default {
   deleteMeal,
   updateOrderStatus,
   myMeals,
-  getAllOrder
+  getAllOrder,
+  updateSellerProfile,
+  getMySellerProfile
 };

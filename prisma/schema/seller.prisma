@@ -8,7 +8,7 @@ model Seller {
     phoneNumber        String?
     isProfileCompleted Boolean  @default(false)
     isApproved         Boolean  @default(false)
-    isOpen             Boolean  @default(false)
+    isOpen             Boolean  @default(true)
     createdAt          DateTime @default(now())
     updatedAt          DateTime @updatedAt
 

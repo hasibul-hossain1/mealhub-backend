@@ -134,6 +134,26 @@ const getAllOrder:RequestHandler= async (req,res) => {
   })
 }
 
+const updateSellerProfile:RequestHandler = async (req,res) => {
+  const userId = req.user.id
+  const data = await sellerService.updateSellerProfile({userId,payload:req.body})
+  res.json({
+    success:true,
+    data,
+    message:"Updated seller profile successfully"
+  })
+}
+
+const getMySellerProfile:RequestHandler = async (req,res) => {
+  const userId = req.user.id
+  const data = await sellerService.getMySellerProfile({userId})
+  res.json({
+    success:true,
+    data,
+    message:"Retrieved my seller profile successfully"
+  })
+}
+
 
 export default {
   signUpAsProvider,
@@ -144,5 +164,7 @@ export default {
   deleteMeal,
   updateOrderStatus,
   myMeals,
-  getAllOrder
+  getAllOrder,
+  updateSellerProfile,
+  getMySellerProfile
 };

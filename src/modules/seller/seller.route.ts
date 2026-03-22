@@ -15,6 +15,7 @@ router.get("/meals",authMiddleware(Role.SELLER),catchAsync(sellerController.myMe
 
 router.get('/',catchAsync(sellerController.getAllSellers))
 
+router.get('/my-seller-profile',authMiddleware(Role.SELLER),catchAsync(sellerController.getMySellerProfile))
 router.get('/:id',catchAsync(sellerController.getSingleSellerWithMenu))
 
 router.post("/meals",authMiddleware(Role.SELLER),catchAsync(sellerController.addMeal))
@@ -24,6 +25,12 @@ router.patch("/meals/:id",authMiddleware(Role.SELLER,Role.ADMIN),catchAsync(sell
 router.delete("/meals/:id",authMiddleware(Role.SELLER,Role.ADMIN),catchAsync(sellerController.deleteMeal))
 
 router.patch("/orders/:id",authMiddleware(Role.SELLER),catchAsync(sellerController.updateOrderStatus))
+
+router.patch("/complete-profile",authMiddleware(Role.SELLER),catchAsync(sellerController.updateSellerProfile))
+
+router.get(`/my-seller-profile`,authMiddleware(Role.SELLER),catchAsync(sellerController.getMySellerProfile))
+
+
 
 
 
