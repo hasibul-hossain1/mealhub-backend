@@ -12,7 +12,7 @@ export const auth = betterAuth({
     enabled: true,
     requireEmailVerification: true,
   },
-  trustedOrigins: ["http://localhost:3000","https://tyme2eat.vercel.app/"],
+  trustedOrigins: ["http://localhost:3000","https://tyme2eat.vercel.app"],
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
       console.log("mail sent");
