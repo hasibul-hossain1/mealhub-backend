@@ -7,7 +7,6 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
-  baseURL: "https://mealhub-backend-9j3p.onrender.com",
   basePath: "/api/v1/auth",
   emailAndPassword: {
     enabled: true,
