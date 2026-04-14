@@ -6,9 +6,10 @@ const createOrder: RequestHandler = async (req, res) => {
   const userId = req.user.id;
   const items = req.body.items;
   const address = req.body.address;
-  const data = await orderService.createOrder({ items, address, userId });
+  const paymentMethod = req.body.paymentMethod || "COD"; // Default to COD if not specified
+  const data = await orderService.createOrder({ items, address, userId, paymentMethod });
   res.status(201).json({
-    successes: true,
+    success: true,
     data,
     message: "Order created successfully",
   });

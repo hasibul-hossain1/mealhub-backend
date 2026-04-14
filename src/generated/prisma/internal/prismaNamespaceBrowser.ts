@@ -173,7 +173,11 @@ export const OrderScalarFieldEnum = {
   totalPrice: 'totalPrice',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  address: 'address'
+  address: 'address',
+  isPaid: 'isPaid',
+  paidAt: 'paidAt',
+  stripeSessionId: 'stripeSessionId',
+  paymentMethod: 'paymentMethod'
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]

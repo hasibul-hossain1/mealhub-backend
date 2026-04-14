@@ -4,8 +4,14 @@ import {auth} from '../lib/auth.js'
 import router from "../routes/index.js";
 import cors from 'cors'
 import { globalErrorHandler } from "../middleware/error.middleware.js";
+import { webhookHandler } from "../utils/webhookHandler.js";
 
 const app = express()
+
+// ⚠️ Webhook must come BEFORE body parsing middleware
+app.post("/webhook", express.raw({ type: "application/json" }), webhookHandler)
+
+
 app.use(express.json())
 app.use(cors({
     origin:["http://localhost:3000","http://192.168.0.30:3000","https://tyme2eat.vercel.app"],

@@ -1,6 +1,6 @@
-# MealHub Backend
+# Tyme2eat Backend
 
-MealHub Backend is a TypeScript + Express API for a food ordering platform. It handles authentication, user roles, seller onboarding, meal and category management, customer orders, and meal reviews.
+Tyme2eat Backend is a TypeScript + Express API for a food ordering platform. It handles authentication, user roles, seller onboarding, meal and category management, customer orders, and meal reviews.
 
 The project uses Better Auth for email/password authentication with email verification, Prisma for PostgreSQL access, and Nodemailer for verification emails. The API is organized by feature modules under `src/modules`.
 
@@ -168,7 +168,7 @@ Create a `.env` file in the project root. You can use `.env.example` as a refere
 Example:
 
 ```env
-DATABASE_URL="postgresql://postgres:password@localhost:5432/mealhub?schema=public"
+DATABASE_URL="postgresql://postgres:password@localhost:5432/Tyme2eat?schema=public"
 PORT=5000
 
 BETTER_AUTH_SECRET="replace-with-a-long-random-secret"

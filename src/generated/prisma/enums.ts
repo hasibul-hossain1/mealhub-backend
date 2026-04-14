@@ -27,3 +27,11 @@ export const Status = {
 } as const
 
 export type Status = (typeof Status)[keyof typeof Status]
+
+
+export const PaymentMethod = {
+  STRIPE: 'STRIPE',
+  COD: 'COD'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
