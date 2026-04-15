@@ -5,6 +5,7 @@ import router from "../routes/index.js";
 import cors from 'cors'
 import { globalErrorHandler } from "../middleware/error.middleware.js";
 import { webhookHandler } from "../utils/webhookHandler.js";
+import cookieParser from "cookie-parser";
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.post("/webhook", express.raw({ type: "application/json" }), webhookHandler)
 
 
 app.use(express.json())
+app.use(cookieParser());
 app.use(cors({
     origin:["http://localhost:3000","http://192.168.0.30:3000","https://tyme2eat.vercel.app"],
     credentials:true
@@ -23,15 +25,18 @@ app.use((req,res,next)=>{
     next()
 })
 
+app.use(express.urlencoded({extended: true}))
+
 app.all('/api/v1/auth/{*any}', toNodeHandler(auth));
 
 
 app.use('/api/v1',router)
 
-app.use(globalErrorHandler)
 
 app.get('/',(req,res) => {
     res.send("The server is working")
 })
+
+app.use(globalErrorHandler)
 
 export default app

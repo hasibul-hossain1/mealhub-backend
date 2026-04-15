@@ -2,17 +2,20 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma.js";
 import { sendMail } from "../utils/mailer.js";
+import config from "../config/index.js";
+import { oAuthProxy } from "better-auth/plugins";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
+  baseURL: config.frontend_url,
   basePath: "/api/v1/auth",
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
   },
-  trustedOrigins: ["http://localhost:3000","https://tyme2eat.vercel.app"],
+  trustedOrigins: ["http://localhost:3000", "https://tyme2eat.vercel.app"],
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
       console.log("mail sent");
@@ -24,12 +27,35 @@ export const auth = betterAuth({
     additionalFields: {
       role: {
         type: "string",
-        required:false
+        required: false,
       },
-      isActive:{
+      isActive: {
         type: "boolean",
-        required:false
+        required: false,
       },
     },
   },
+  advanced: {
+    cookies: {
+      session_token: {
+        name: "session_token",
+        attributes: {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+          partitioned: true,
+        },
+      },
+      state: {
+        name: "session_token",
+        attributes: {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+          partitioned: true,
+        },
+      },
+    },
+  },
+  plugins:[oAuthProxy()]
 });
