@@ -203,7 +203,18 @@ const updateOrderStatus = async (
     throw new ApiError(401, "Unauthorized");
   }
 
-  return prisma.order.update({
+  if (status === "DELIVERED") {
+    return await prisma.order.update({
+      where: { id: orderId},
+      data: {
+        status,
+        paidAt: new Date(),
+        isPaid: true
+      }
+    })
+  }
+
+  return await prisma.order.update({
     where: { id: orderId },
     data: { status },
   });
